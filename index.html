@@ -6,7 +6,7 @@
     <title>ULTRA PEAK | Elite Developer</title>
     
     <!-- Favicon -->
-    <link rel="icon" href="https://spiritcat122.github.io/Images/p/97a18b83af983f1c5235a2872a9f868d.jpg">
+    <link rel="icon" href="https://spiritcat122.github.io/Images/p/0623f84e2f4b8e8a44298cf843ce4f29.jpg">
     
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -471,11 +471,6 @@
             100% { clip: rect(38px, 9999px, 49px, 0); }
         }
         
-        /* NEW: Parallax Scrolling */
-        .parallax-element {
-            transition: transform 0.1s ease-out;
-        }
-        
         /* NEW: Loading Animation */
         .loading-bar {
             width: 100%;
@@ -494,6 +489,23 @@
             0% { transform: scaleX(0); }
             50% { transform: scaleX(1); }
             100% { transform: scaleX(0); transform-origin: right; }
+        }
+        
+        /* Ripple Effect */
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
+        }
+        
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
         }
         
         /* Responsive Design */
@@ -549,8 +561,8 @@
                         and revolutionary web experiences.
                     </p>
                     <div class="d-flex gap-3 animate__animated animate__fadeInUp">
-                        <button class="btn btn-gradient magnetic-card">Explore My Work</button>
-                        <button class="btn btn-outline-light magnetic-card">Download CV</button>
+                        <button class="btn btn-gradient magnetic-card" id="exploreWork">Explore My Work</button>
+                        <button class="btn btn-outline-light magnetic-card" id="downloadCV">Download CV</button>
                     </div>
                     <div class="mt-5 d-flex gap-4">
                         <div class="text-center">
@@ -661,6 +673,13 @@
                     </div>
                 </div>
             </div>
+            
+            <!-- Project Buttons -->
+            <div class="text-center mt-5">
+                <button class="btn btn-gradient me-3" id="viewAngularProjects">View Angular Projects</button>
+                <button class="btn btn-outline-light me-3" id="viewSvelteProjects">View Svelte Projects</button>
+                <button class="btn btn-gradient" id="viewAllProjects">View All Projects</button>
+            </div>
         </div>
     </section>
 
@@ -694,11 +713,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="mt-4">
+                        <button class="btn btn-gradient me-3" id="scheduleCall">Schedule a Call</button>
+                        <button class="btn btn-outline-light" id="sendEmail">Send Quick Email</button>
+                    </div>
                 </div>
                 
                 <div class="col-lg-6" data-aos="fade-left">
                     <div class="glass-card p-5 magnetic-card">
-                        <form>
+                        <form id="contactForm">
                             <div class="row g-3">
                                 <div class="col-md-6">
                                     <input type="text" class="form-control bg-dark text-light border-secondary" placeholder="Your Name" required>
@@ -731,7 +754,8 @@
                     <p class="mb-0">&copy; 2024 ULTRA PEAK. Pushing boundaries since day one.</p>
                 </div>
                 <div class="col-md-6 text-end">
-                    <p class="mb-0 neon-text" style="color: var(--neon);">Crafted with <i class="fas fa-heart text-danger"></i> and cutting-edge tech</p>
+                    <button class="btn btn-outline-light btn-sm me-2" id="backToTop">Back to Top</button>
+                    <button class="btn btn-outline-light btn-sm" id="toggleTheme">Toggle Theme</button>
                 </div>
             </div>
         </div>
@@ -768,8 +792,8 @@
             // Add magnetic hover effects
             initMagneticCards();
             
-            // Add parallax scrolling
-            initParallax();
+            // Initialize all button functionalities
+            initButtonFunctions();
             
             // Animate progress bars
             const progressBars = document.querySelectorAll('.progress-fill');
@@ -835,10 +859,10 @@
                 console.log('Failed to load developer image, using fallback');
                 mainImage.innerHTML = `
                     <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 2rem;">
-                        <i class="fas fa-user-ninja fa-5x" style="background: linear-gradient(45deg, var(--primary), var(--secondary)); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 1rem;"></i>
-                        <h4 style="color: var(--neon); margin-bottom: 0.5rem;">Elite Developer</h4>
-                        <p style="color: var(--light); opacity: 0.8;">Cutting-Edge Innovation</p>
-                        <small style="color: var(--light); opacity: 0.6;">Image optimized for peak performance</small>
+                        <i class="fas fa-user-ninja fa-5x" style="background: linear-gradient(45deg, #6366f1, #8b5cf6); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 1rem;"></i>
+                        <h4 style="color: #00ff88; margin-bottom: 0.5rem;">Elite Developer</h4>
+                        <p style="color: #f8fafc; opacity: 0.8;">Cutting-Edge Innovation</p>
+                        <small style="color: #f8fafc; opacity: 0.6;">Image optimized for peak performance</small>
                     </div>
                 `;
             };
@@ -875,10 +899,10 @@
                 particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
                 
                 // Random color
-                const colors = [var('--neon'), var('--primary'), var('--accent')];
+                const colors = ['#00ff88', '#6366f1', '#06b6d4'];
                 const randomColor = colors[Math.floor(Math.random() * colors.length)];
                 particle.style.background = randomColor;
-                particle.style.boxShadow = `0 0 10px ${randomColor}`;
+                particle.style.boxShadow = '0 0 10px ' + randomColor;
                 
                 container.appendChild(particle);
             }
@@ -909,46 +933,86 @@
             });
         }
         
-        // NEW: Parallax Scrolling
-        function initParallax() {
-            const parallaxElements = document.querySelectorAll('.parallax-element');
+        // NEW: Initialize all button functions
+        function initButtonFunctions() {
+            // Explore Work Button
+            document.getElementById('exploreWork').addEventListener('click', function() {
+                document.getElementById('skills').scrollIntoView({ behavior: 'smooth' });
+                createRipple(this);
+            });
             
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const rate = scrolled * -0.5;
-                
-                parallaxElements.forEach(element => {
-                    element.style.transform = `translateY(${rate}px)`;
-                });
+            // Download CV Button
+            document.getElementById('downloadCV').addEventListener('click', function() {
+                alert('Downloading Elite Developer CV...\nYour download will start shortly!');
+                createRipple(this);
+            });
+            
+            // Project Buttons
+            document.getElementById('viewAngularProjects').addEventListener('click', function() {
+                alert('Opening Angular Projects Gallery...');
+                createRipple(this);
+            });
+            
+            document.getElementById('viewSvelteProjects').addEventListener('click', function() {
+                alert('Opening Svelte Projects Gallery...');
+                createRipple(this);
+            });
+            
+            document.getElementById('viewAllProjects').addEventListener('click', function() {
+                alert('Opening Complete Project Portfolio...');
+                createRipple(this);
+            });
+            
+            // Contact Buttons
+            document.getElementById('scheduleCall').addEventListener('click', function() {
+                alert('Opening Calendar for Scheduling...');
+                createRipple(this);
+            });
+            
+            document.getElementById('sendEmail').addEventListener('click', function() {
+                window.location.href = 'mailto:elite@ultrapeak.dev?subject=Project Inquiry&body=Hello, I would like to discuss a project...';
+                createRipple(this);
+            });
+            
+            // Footer Buttons
+            document.getElementById('backToTop').addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                createRipple(this);
+            });
+            
+            document.getElementById('toggleTheme').addEventListener('click', function() {
+                document.body.classList.toggle('light-theme');
+                alert('Theme Toggled! (Visual changes would apply in full implementation)');
+                createRipple(this);
+            });
+            
+            // Contact Form Submission
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Project Launched! 🚀\nThank you for your vision. We will contact you shortly.');
+                this.reset();
             });
         }
         
-        // Helper function to get CSS variables
-        function var(name) {
-            return getComputedStyle(document.documentElement).getPropertyValue(name);
+        // Ripple Effect Function
+        function createRipple(button) {
+            const ripple = document.createElement('span');
+            const rect = button.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = event.clientX - rect.left - size / 2;
+            const y = event.clientY - rect.top - size / 2;
+            
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+            
+            button.appendChild(ripple);
+            
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
         }
-        
-        // NEW: Add ripple effect to buttons
-        document.querySelectorAll('.btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.width = ripple.style.height = size + 'px';
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
-                ripple.classList.add('ripple');
-                
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            });
-        });
     </script>
 </body>
 </html>
