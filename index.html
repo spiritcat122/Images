@@ -164,7 +164,7 @@
             50% { opacity: 0; }
         }
         
-        /* Developer Image Container */
+        /* Developer Image Container - FIXED */
         .developer-container {
             position: relative;
             perspective: 1000px;
@@ -174,29 +174,37 @@
             min-height: 500px;
         }
         
-        .developer-image {
+        .developer-image-wrapper {
+            position: relative;
             width: 100%;
             max-width: 400px;
             height: 500px;
             border-radius: 20px;
-            transform-style: preserve-3d;
-            transition: transform 0.5s ease;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+            padding: 4px;
             box-shadow: 
                 0 0 50px rgba(99, 102, 241, 0.5),
-                0 0 100px rgba(139, 92, 246, 0.3),
-                inset 0 0 50px rgba(6, 182, 212, 0.2);
-            border: 2px solid transparent;
-            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent)) border-box;
-            -webkit-mask: 
-                linear-gradient(#fff 0 0) padding-box, 
-                linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
+                0 0 100px rgba(139, 92, 246, 0.3);
+        }
+        
+        .developer-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 16px;
             object-fit: cover;
-            background-image: url('https://spiritcat122.github.io/Images/p/97a18b83af983f1c5235a2872a9f868d.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background: var(--darker);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .developer-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 16px;
         }
         
         .developer-image::before {
@@ -210,17 +218,8 @@
                 rgba(99, 102, 241, 0.1) 0%, 
                 rgba(139, 92, 246, 0.1) 50%, 
                 rgba(6, 182, 212, 0.1) 100%);
-            border-radius: 20px;
+            border-radius: 16px;
             z-index: 1;
-        }
-        
-        .developer-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 18px;
-            position: relative;
-            z-index: 2;
         }
         
         .floating-element {
@@ -347,57 +346,180 @@
             100% { transform: translateX(100%); }
         }
         
+        /* NEW: Interactive Particles */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--neon);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--neon);
+            animation: particle-float 8s infinite linear;
+        }
+        
+        @keyframes particle-float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* NEW: Hover Effects */
+        .magnetic-card {
+            transition: transform 0.3s ease;
+        }
+        
+        .magnetic-card:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+        
+        /* NEW: Text Glitch Effect */
+        .glitch-text {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .glitch-text::before,
+        .glitch-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch-text::before {
+            left: 2px;
+            text-shadow: -2px 0 #ff00ff;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+        
+        .glitch-text::after {
+            left: -2px;
+            text-shadow: -2px 0 #00ffff;
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+        
+        @keyframes glitch-anim {
+            0% { clip: rect(42px, 9999px, 44px, 0); }
+            5% { clip: rect(12px, 9999px, 59px, 0); }
+            10% { clip: rect(48px, 9999px, 29px, 0); }
+            15% { clip: rect(42px, 9999px, 73px, 0); }
+            20% { clip: rect(63px, 9999px, 27px, 0); }
+            25% { clip: rect(34px, 9999px, 55px, 0); }
+            30% { clip: rect(86px, 9999px, 73px, 0); }
+            35% { clip: rect(20px, 9999px, 20px, 0); }
+            40% { clip: rect(26px, 9999px, 60px, 0); }
+            45% { clip: rect(25px, 9999px, 66px, 0); }
+            50% { clip: rect(57px, 9999px, 98px, 0); }
+            55% { clip: rect(5px, 9999px, 46px, 0); }
+            60% { clip: rect(82px, 9999px, 31px, 0); }
+            65% { clip: rect(54px, 9999px, 27px, 0); }
+            70% { clip: rect(28px, 9999px, 99px, 0); }
+            75% { clip: rect(45px, 9999px, 69px, 0); }
+            80% { clip: rect(23px, 9999px, 85px, 0); }
+            85% { clip: rect(54px, 9999px, 84px, 0); }
+            90% { clip: rect(45px, 9999px, 47px, 0); }
+            95% { clip: rect(37px, 9999px, 20px, 0); }
+            100% { clip: rect(4px, 9999px, 91px, 0); }
+        }
+        
+        @keyframes glitch-anim2 {
+            0% { clip: rect(65px, 9999px, 100px, 0); }
+            5% { clip: rect(52px, 9999px, 74px, 0); }
+            10% { clip: rect(79px, 9999px, 85px, 0); }
+            15% { clip: rect(75px, 9999px, 5px, 0); }
+            20% { clip: rect(67px, 9999px, 61px, 0); }
+            25% { clip: rect(14px, 9999px, 79px, 0); }
+            30% { clip: rect(1px, 9999px, 66px, 0); }
+            35% { clip: rect(86px, 9999px, 30px, 0); }
+            40% { clip: rect(23px, 9999px, 98px, 0); }
+            45% { clip: rect(85px, 9999px, 72px, 0); }
+            50% { clip: rect(71px, 9999px, 75px, 0); }
+            55% { clip: rect(2px, 9999px, 48px, 0); }
+            60% { clip: rect(30px, 9999px, 16px, 0); }
+            65% { clip: rect(59px, 9999px, 50px, 0); }
+            70% { clip: rect(41px, 9999px, 62px, 0); }
+            75% { clip: rect(2px, 9999px, 82px, 0); }
+            80% { clip: rect(47px, 9999px, 73px, 0); }
+            85% { clip: rect(3px, 9999px, 27px, 0); }
+            90% { clip: rect(26px, 9999px, 55px, 0); }
+            95% { clip: rect(42px, 9999px, 97px, 0); }
+            100% { clip: rect(38px, 9999px, 49px, 0); }
+        }
+        
+        /* NEW: Parallax Scrolling */
+        .parallax-element {
+            transition: transform 0.1s ease-out;
+        }
+        
+        /* NEW: Loading Animation */
+        .loading-bar {
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 9999;
+            transform: scaleX(0);
+            transform-origin: left;
+            animation: loading 2s ease-in-out;
+        }
+        
+        @keyframes loading {
+            0% { transform: scaleX(0); }
+            50% { transform: scaleX(1); }
+            100% { transform: scaleX(0); transform-origin: right; }
+        }
+        
         /* Responsive Design */
         @media (max-width: 768px) {
             .hero-title {
                 font-size: 3rem;
             }
             
-            .developer-image {
+            .developer-image-wrapper {
                 max-width: 300px;
                 height: 400px;
             }
         }
-        
-        /* Custom Animations */
-        @keyframes glow {
-            0%, 100% { 
-                box-shadow: 0 0 5px var(--primary), 0 0 10px var(--primary); 
-            }
-            50% { 
-                box-shadow: 0 0 20px var(--primary), 0 0 30px var(--primary), 0 0 40px var(--primary); 
-            }
-        }
-        
-        .glowing {
-            animation: glow 2s ease-in-out infinite;
-        }
-        
-        /* Fallback Image Styling */
-        .image-fallback {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
-        }
-        
-        .fallback-icon {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
     </style>
 </head>
 <body>
+    <!-- Loading Animation -->
+    <div class="loading-bar"></div>
+    
+    <!-- Interactive Particles -->
+    <div class="particles-container" id="particlesContainer"></div>
+    
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">ULTRA PEAK</a>
+            <a class="navbar-brand glitch-text" data-text="ULTRA PEAK">ULTRA PEAK</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -427,8 +549,8 @@
                         and revolutionary web experiences.
                     </p>
                     <div class="d-flex gap-3 animate__animated animate__fadeInUp">
-                        <button class="btn btn-gradient">Explore My Work</button>
-                        <button class="btn btn-outline-light">Download CV</button>
+                        <button class="btn btn-gradient magnetic-card">Explore My Work</button>
+                        <button class="btn btn-outline-light magnetic-card">Download CV</button>
                     </div>
                     <div class="mt-5 d-flex gap-4">
                         <div class="text-center">
@@ -447,31 +569,25 @@
                 </div>
                 <div class="col-lg-6" data-aos="fade-left">
                     <div class="developer-container">
-                        <!-- Main Developer Image with Multiple Fallbacks -->
-                        <div class="developer-image floating-element" id="mainDeveloperImage">
-                            <!-- Image will be loaded via JavaScript -->
-                        </div>
-                        
-                        <!-- Fallback Content (hidden by default) -->
-                        <div class="developer-image floating-element image-fallback" id="imageFallback" style="display: none;">
-                            <i class="fas fa-user-ninja fallback-icon"></i>
-                            <h4>Elite Developer</h4>
-                            <p>Cutting-Edge Innovation</p>
-                            <small class="text-muted">Image loading...</small>
+                        <!-- Fixed Developer Image with proper border -->
+                        <div class="developer-image-wrapper floating-element">
+                            <div class="developer-image" id="mainDeveloperImage">
+                                <!-- Image will be loaded via JavaScript -->
+                            </div>
                         </div>
                         
                         <!-- Floating Tech Badges -->
-                        <div class="floating-element glass-card p-3 position-absolute" style="top: -30px; left: -30px; width: 120px; animation-delay: 1s;">
+                        <div class="floating-element glass-card p-3 position-absolute magnetic-card" style="top: -30px; left: -30px; width: 120px; animation-delay: 1s;">
                             <i class="fab fa-angular fa-2x text-danger mb-2"></i>
                             <h6>Angular</h6>
                         </div>
                         
-                        <div class="floating-element glass-card p-3 position-absolute" style="top: 50%; right: -40px; width: 120px; animation-delay: 2s;">
+                        <div class="floating-element glass-card p-3 position-absolute magnetic-card" style="top: 50%; right: -40px; width: 120px; animation-delay: 2s;">
                             <i class="fab fa-svelte fa-2x text-warning mb-2"></i>
                             <h6>Svelte</h6>
                         </div>
                         
-                        <div class="floating-element glass-card p-3 position-absolute" style="bottom: -30px; left: 20%; width: 120px; animation-delay: 3s;">
+                        <div class="floating-element glass-card p-3 position-absolute magnetic-card" style="bottom: -30px; left: 20%; width: 120px; animation-delay: 3s;">
                             <i class="fab fa-react fa-2x text-info mb-2"></i>
                             <h6>React</h6>
                         </div>
@@ -492,7 +608,7 @@
             <div class="row g-4">
                 <!-- Framework Cards -->
                 <div class="col-md-4" data-aos="flip-left">
-                    <div class="framework-card glass-card p-4 text-center h-100">
+                    <div class="framework-card glass-card p-4 text-center h-100 magnetic-card">
                         <div class="icon-container mb-4">
                             <i class="fab fa-angular fa-5x text-danger"></i>
                         </div>
@@ -510,7 +626,7 @@
                 </div>
                 
                 <div class="col-md-4" data-aos="flip-left" data-aos-delay="100">
-                    <div class="framework-card glass-card p-4 text-center h-100">
+                    <div class="framework-card glass-card p-4 text-center h-100 magnetic-card">
                         <div class="icon-container mb-4">
                             <i class="fab fa-svelte fa-5x text-warning"></i>
                         </div>
@@ -528,7 +644,7 @@
                 </div>
                 
                 <div class="col-md-4" data-aos="flip-left" data-aos-delay="200">
-                    <div class="framework-card glass-card p-4 text-center h-100">
+                    <div class="framework-card glass-card p-4 text-center h-100 magnetic-card">
                         <div class="icon-container mb-4">
                             <i class="fab fa-bootstrap fa-5x text-purple"></i>
                         </div>
@@ -581,7 +697,7 @@
                 </div>
                 
                 <div class="col-lg-6" data-aos="fade-left">
-                    <div class="glass-card p-5">
+                    <div class="glass-card p-5 magnetic-card">
                         <form>
                             <div class="row g-3">
                                 <div class="col-md-6">
@@ -646,6 +762,15 @@
             // Load developer image with multiple fallbacks
             loadDeveloperImage();
             
+            // Create interactive particles
+            createParticles();
+            
+            // Add magnetic hover effects
+            initMagneticCards();
+            
+            // Add parallax scrolling
+            initParallax();
+            
             // Animate progress bars
             const progressBars = document.querySelectorAll('.progress-fill');
             
@@ -681,10 +806,9 @@
             });
         });
         
-        // Developer Image Loading with Multiple Fallbacks
+        // Fixed Developer Image Loading
         function loadDeveloperImage() {
             const mainImage = document.getElementById('mainDeveloperImage');
-            const fallback = document.getElementById('imageFallback');
             const imageUrl = 'https://spiritcat122.github.io/Images/p/97a18b83af983f1c5235a2872a9f868d.jpg';
             
             // Create image element
@@ -695,18 +819,28 @@
                 console.log('Developer image loaded successfully');
                 mainImage.innerHTML = '';
                 mainImage.appendChild(img);
-                mainImage.style.display = 'block';
-                fallback.style.display = 'none';
+                
+                // Add hover effect to image
+                img.style.transition = 'transform 0.3s ease';
+                img.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.05)';
+                });
+                img.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
             };
             
             // When image fails to load
             img.onerror = function() {
                 console.log('Failed to load developer image, using fallback');
-                mainImage.style.display = 'none';
-                fallback.style.display = 'flex';
-                
-                // Try alternative image sources
-                tryAlternativeImages();
+                mainImage.innerHTML = `
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 2rem;">
+                        <i class="fas fa-user-ninja fa-5x" style="background: linear-gradient(45deg, var(--primary), var(--secondary)); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 1rem;"></i>
+                        <h4 style="color: var(--neon); margin-bottom: 0.5rem;">Elite Developer</h4>
+                        <p style="color: var(--light); opacity: 0.8;">Cutting-Edge Innovation</p>
+                        <small style="color: var(--light); opacity: 0.6;">Image optimized for peak performance</small>
+                    </div>
+                `;
             };
             
             // Set image attributes and start loading
@@ -715,84 +849,105 @@
             img.style.width = '100%';
             img.style.height = '100%';
             img.style.objectFit = 'cover';
-            img.style.borderRadius = '18px';
-            
-            // Add loading class
-            mainImage.classList.add('loading');
+            img.style.borderRadius = '16px';
         }
         
-        // Try alternative image sources if main one fails
-        function tryAlternativeImages() {
-            const alternativeUrls = [
-                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-                'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
-                'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80'
-            ];
+        // NEW: Interactive Particles
+        function createParticles() {
+            const container = document.getElementById('particlesContainer');
+            const particleCount = 50;
             
-            const mainImage = document.getElementById('mainDeveloperImage');
-            const fallback = document.getElementById('imageFallback');
-            
-            let currentIndex = 0;
-            
-            function tryNextImage() {
-                if (currentIndex >= alternativeUrls.length) {
-                    console.log('All alternative images failed, keeping fallback');
-                    return;
-                }
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
                 
-                const img = new Image();
-                img.onload = function() {
-                    console.log('Alternative image loaded successfully');
-                    mainImage.innerHTML = '';
-                    mainImage.appendChild(img);
-                    mainImage.style.display = 'block';
-                    fallback.style.display = 'none';
-                };
+                // Random position
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
                 
-                img.onerror = function() {
-                    console.log('Alternative image failed, trying next...');
-                    currentIndex++;
-                    tryNextImage();
-                };
+                // Random size
+                const size = Math.random() * 3 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
                 
-                img.src = alternativeUrls[currentIndex];
-                img.alt = 'Professional Developer';
-                img.style.width = '100%';
-                img.style.height = '100%';
-                img.style.objectFit = 'cover';
-                img.style.borderRadius = '18px';
+                // Random animation delay and duration
+                particle.style.animationDelay = Math.random() * 5 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 5) + 's';
+                
+                // Random color
+                const colors = [var('--neon'), var('--primary'), var('--accent')];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.background = randomColor;
+                particle.style.boxShadow = `0 0 10px ${randomColor}`;
+                
+                container.appendChild(particle);
             }
-            
-            // Start trying alternative images
-            tryNextImage();
         }
         
-        // Add floating animation to developer image
-        function animateDeveloperImage() {
-            const image = document.querySelector('.developer-image');
-            if (!image) return;
+        // NEW: Magnetic Card Effects
+        function initMagneticCards() {
+            const cards = document.querySelectorAll('.magnetic-card');
             
-            let startTime = null;
-            
-            function floatAnimation(timestamp) {
-                if (!startTime) startTime = timestamp;
-                const progress = timestamp - startTime;
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const angleX = (y - centerY) / 10;
+                    const angleY = (centerX - x) / 10;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale3d(1.05, 1.05, 1.05)`;
+                });
                 
-                // Floating effect
-                const y = Math.sin(progress * 0.002) * 20;
-                const rotation = Math.sin(progress * 0.001) * 3;
-                
-                image.style.transform = `translateY(${y}px) rotate(${rotation}deg)`;
-                
-                requestAnimationFrame(floatAnimation);
-            }
-            
-            requestAnimationFrame(floatAnimation);
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+                });
+            });
         }
         
-        // Start animations when page loads
-        window.addEventListener('load', function() {
-            animateDeveloperImage();
+        // NEW: Parallax Scrolling
+        function initParallax() {
+            const parallaxElements = document.querySelectorAll('.parallax-element');
+            
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.5;
+                
+                parallaxElements.forEach(element => {
+                    element.style.transform = `translateY(${rate}px)`;
+                });
+            });
+        }
+        
+        // Helper function to get CSS variables
+        function var(name) {
+            return getComputedStyle(document.documentElement).getPropertyValue(name);
+        }
+        
+        // NEW: Add ripple effect to buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
         });
     </script>
 </body>
