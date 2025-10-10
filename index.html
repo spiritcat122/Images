@@ -6,7 +6,7 @@
     <title>ULTRA PEAK | Elite Developer</title>
     
     <!-- Favicon -->
-    <link rel="icon" href="https://spiritcat122.github.io/Images/p/0623f84e2f4b8e8a44298cf843ce4f29.jpg">
+    <link rel="icon" href="https://spiritcat122.github.io/Images/p/97a18b83af983f1c5235a2872a9f868d.jpg">
     
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -19,19 +19,6 @@
     
     <!-- AOS Animation -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
-    <!-- GSAP -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    
-    <!-- Three.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    
-    <!-- Typed.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
-    
-    <!-- Tilt.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tilt.js/1.2.1/tilt.jquery.min.js"></script>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700;800&family=Exo+2:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -142,15 +129,6 @@
             align-items: center;
         }
         
-        #three-js-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-        
         .hero-content {
             position: relative;
             z-index: 10;
@@ -190,11 +168,16 @@
         .developer-container {
             position: relative;
             perspective: 1000px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 500px;
         }
         
         .developer-image {
             width: 100%;
-            max-width: 500px;
+            max-width: 400px;
+            height: 500px;
             border-radius: 20px;
             transform-style: preserve-3d;
             transition: transform 0.5s ease;
@@ -209,6 +192,35 @@
                 linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
+            object-fit: cover;
+            background-image: url('https://spiritcat122.github.io/Images/p/97a18b83af983f1c5235a2872a9f868d.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .developer-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, 
+                rgba(99, 102, 241, 0.1) 0%, 
+                rgba(139, 92, 246, 0.1) 50%, 
+                rgba(6, 182, 212, 0.1) 100%);
+            border-radius: 20px;
+            z-index: 1;
+        }
+        
+        .developer-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 18px;
+            position: relative;
+            z-index: 2;
         }
         
         .floating-element {
@@ -239,10 +251,6 @@
         /* Neon Effects */
         .neon-text {
             text-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 40px currentColor;
-        }
-        
-        .neon-border {
-            box-shadow: 0 0 10px var(--neon), 0 0 20px var(--neon), inset 0 0 10px var(--neon);
         }
         
         /* Gradient Buttons */
@@ -339,16 +347,6 @@
             100% { transform: translateX(100%); }
         }
         
-        /* Particle Background */
-        .particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            z-index: 0;
-        }
-        
         /* Responsive Design */
         @media (max-width: 768px) {
             .hero-title {
@@ -357,6 +355,7 @@
             
             .developer-image {
                 max-width: 300px;
+                height: 400px;
             }
         }
         
@@ -374,25 +373,23 @@
             animation: glow 2s ease-in-out infinite;
         }
         
-        /* Matrix Rain Effect */
-        .matrix-rain {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            opacity: 0.1;
+        /* Fallback Image Styling */
+        .image-fallback {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
         }
         
-        /* Floating Shapes */
-        .floating-shape {
-            position: absolute;
-            border-radius: 50%;
+        .fallback-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
             background: linear-gradient(45deg, var(--primary), var(--secondary));
-            opacity: 0.1;
-            filter: blur(40px);
-            z-index: 0;
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
     </style>
 </head>
@@ -418,7 +415,6 @@
 
     <!-- Hero Section -->
     <section id="home" class="hero-section bg-pattern">
-        <div id="three-js-bg"></div>
         <div class="container">
             <div class="row align-items-center min-vh-100">
                 <div class="col-lg-6" data-aos="fade-right">
@@ -451,8 +447,18 @@
                 </div>
                 <div class="col-lg-6" data-aos="fade-left">
                     <div class="developer-container">
-                        <img src="https://spiritcat122.github.io/Images/p/97a18b83af983f1c5235a2872a9f868d.jpg" 
-                             alt="Elite Developer" class="developer-image floating-element">
+                        <!-- Main Developer Image with Multiple Fallbacks -->
+                        <div class="developer-image floating-element" id="mainDeveloperImage">
+                            <!-- Image will be loaded via JavaScript -->
+                        </div>
+                        
+                        <!-- Fallback Content (hidden by default) -->
+                        <div class="developer-image floating-element image-fallback" id="imageFallback" style="display: none;">
+                            <i class="fas fa-user-ninja fallback-icon"></i>
+                            <h4>Elite Developer</h4>
+                            <p>Cutting-Edge Innovation</p>
+                            <small class="text-muted">Image loading...</small>
+                        </div>
                         
                         <!-- Floating Tech Badges -->
                         <div class="floating-element glass-card p-3 position-absolute" style="top: -30px; left: -30px; width: 120px; animation-delay: 1s;">
@@ -539,117 +545,11 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Additional Skills -->
-            <div class="row mt-5 g-4">
-                <div class="col-md-3 col-6" data-aos="zoom-in">
-                    <div class="glass-card text-center p-4 h-100">
-                        <i class="fab fa-vuejs fa-3x text-success mb-3"></i>
-                        <h5>Vue.js</h5>
-                        <div class="skill-progress mt-2">
-                            <div class="progress-fill" data-width="85"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="100">
-                    <div class="glass-card text-center p-4 h-100">
-                        <i class="fab fa-node-js fa-3x text-success mb-3"></i>
-                        <h5>Node.js</h5>
-                        <div class="skill-progress mt-2">
-                            <div class="progress-fill" data-width="90"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="200">
-                    <div class="glass-card text-center p-4 h-100">
-                        <i class="fab fa-python fa-3x text-warning mb-3"></i>
-                        <h5>Python</h5>
-                        <div class="skill-progress mt-2">
-                            <div class="progress-fill" data-width="88"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-3 col-6" data-aos="zoom-in" data-aos-delay="300">
-                    <div class="glass-card text-center p-4 h-100">
-                        <i class="fas fa-database fa-3x text-info mb-3"></i>
-                        <h5>MongoDB</h5>
-                        <div class="skill-progress mt-2">
-                            <div class="progress-fill" data-width="82"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="bg-dark">
-        <div class="container">
-            <div class="text-center mb-5" data-aos="fade-up">
-                <h2 class="display-4 mb-3 neon-text" style="color: var(--accent);">Revolutionary Projects</h2>
-                <p class="lead">Pushing the boundaries of what's possible in web development</p>
-            </div>
-            
-            <div class="row g-4">
-                <div class="col-lg-4 col-md-6" data-aos="fade-up">
-                    <div class="glass-card h-100 position-relative overflow-hidden project-card">
-                        <div class="project-image" style="height: 200px; background: linear-gradient(45deg, var(--primary), var(--secondary)); display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-atom fa-5x text-white"></i>
-                        </div>
-                        <div class="p-4">
-                            <h4>Quantum Analytics</h4>
-                            <p class="mb-3">Real-time data visualization platform with AI-powered insights</p>
-                            <div class="tags mb-3">
-                                <span class="badge bg-primary me-1">AngularJS</span>
-                                <span class="badge bg-info me-1">Three.js</span>
-                                <span class="badge bg-success">D3.js</span>
-                            </div>
-                            <button class="btn btn-sm btn-gradient">Explore Project</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="glass-card h-100 position-relative overflow-hidden project-card">
-                        <div class="project-image" style="height: 200px; background: linear-gradient(45deg, var(--secondary), var(--accent)); display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-bolt fa-5x text-white"></i>
-                        </div>
-                        <div class="p-4">
-                            <h4>Nexus E-Commerce</h4>
-                            <p class="mb-3">Ultra-fast online store with immersive 3D product visualization</p>
-                            <div class="tags mb-3">
-                                <span class="badge bg-warning me-1">Svelte</span>
-                                <span class="badge bg-danger me-1">Firebase</span>
-                                <span class="badge bg-purple">Stripe</span>
-                            </div>
-                            <button class="btn btn-sm btn-gradient">Explore Project</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
-                    <div class="glass-card h-100 position-relative overflow-hidden project-card">
-                        <div class="project-image" style="height: 200px; background: linear-gradient(45deg, var(--accent), var(--neon)); display: flex; align-items: center; justify-content: center;">
-                            <i class="fas fa-rocket fa-5x text-white"></i>
-                        </div>
-                        <div class="p-4">
-                            <h4>Cyber UI System</h4>
-                            <p class="mb-3">Advanced component library with cyberpunk design system</p>
-                            <div class="tags mb-3">
-                                <span class="badge bg-purple me-1">Bootstrap 5</span>
-                                <span class="badge bg-success me-1">SASS</span>
-                                <span class="badge bg-info">GSAP</span>
-                            </div>
-                            <button class="btn btn-sm btn-gradient">Explore Project</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="bg-pattern">
+    <section id="contact" class="bg-dark">
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-6" data-aos="fade-right">
@@ -677,12 +577,6 @@
                                 <p>Silicon Valley, CA</p>
                             </div>
                         </div>
-                    </div>
-                    <div class="social-links mt-4">
-                        <a href="#" class="text-light me-3"><i class="fab fa-github fa-2x"></i></a>
-                        <a href="#" class="text-light me-3"><i class="fab fa-linkedin fa-2x"></i></a>
-                        <a href="#" class="text-light me-3"><i class="fab fa-twitter fa-2x"></i></a>
-                        <a href="#" class="text-light"><i class="fab fa-dribbble fa-2x"></i></a>
                     </div>
                 </div>
                 
@@ -730,6 +624,7 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
     
     <script>
         // Initialize AOS
@@ -747,6 +642,9 @@
                 backSpeed: 60,
                 loop: true
             });
+            
+            // Load developer image with multiple fallbacks
+            loadDeveloperImage();
             
             // Animate progress bars
             const progressBars = document.querySelectorAll('.progress-fill');
@@ -781,96 +679,121 @@
                     nav.classList.remove('scrolled');
                 }
             });
-            
-            // Three.js Background
-            initThreeJS();
-            
-            // GSAP Animations
-            initGSAP();
         });
         
-        // Three.js Background Animation
-        function initThreeJS() {
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            const renderer = new THREE.WebGLRenderer({ alpha: true });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            document.getElementById('three-js-bg').appendChild(renderer.domElement);
+        // Developer Image Loading with Multiple Fallbacks
+        function loadDeveloperImage() {
+            const mainImage = document.getElementById('mainDeveloperImage');
+            const fallback = document.getElementById('imageFallback');
+            const imageUrl = 'https://spiritcat122.github.io/Images/p/97a18b83af983f1c5235a2872a9f868d.jpg';
             
-            // Create particles
-            const particlesGeometry = new THREE.BufferGeometry();
-            const particlesCount = 5000;
+            // Create image element
+            const img = new Image();
             
-            const posArray = new Float32Array(particlesCount * 3);
+            // When image loads successfully
+            img.onload = function() {
+                console.log('Developer image loaded successfully');
+                mainImage.innerHTML = '';
+                mainImage.appendChild(img);
+                mainImage.style.display = 'block';
+                fallback.style.display = 'none';
+            };
             
-            for(let i = 0; i < particlesCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 5;
-            }
-            
-            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            
-            // Material
-            const particlesMaterial = new THREE.PointsMaterial({
-                size: 0.005,
-                color: new THREE.Color(0.2, 0.5, 1.0)
-            });
-            
-            // Mesh
-            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-            scene.add(particlesMesh);
-            
-            camera.position.z = 2;
-            
-            // Animation
-            function animate() {
-                requestAnimationFrame(animate);
+            // When image fails to load
+            img.onerror = function() {
+                console.log('Failed to load developer image, using fallback');
+                mainImage.style.display = 'none';
+                fallback.style.display = 'flex';
                 
-                particlesMesh.rotation.x += 0.0005;
-                particlesMesh.rotation.y += 0.001;
-                
-                renderer.render(scene, camera);
-            }
+                // Try alternative image sources
+                tryAlternativeImages();
+            };
             
-            animate();
+            // Set image attributes and start loading
+            img.src = imageUrl;
+            img.alt = 'Elite Developer';
+            img.style.width = '100%';
+            img.style.height = '100%';
+            img.style.objectFit = 'cover';
+            img.style.borderRadius = '18px';
             
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
+            // Add loading class
+            mainImage.classList.add('loading');
         }
         
-        // GSAP Animations
-        function initGSAP() {
-            // Register ScrollTrigger plugin
-            gsap.registerPlugin(ScrollTrigger);
+        // Try alternative image sources if main one fails
+        function tryAlternativeImages() {
+            const alternativeUrls = [
+                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+                'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80',
+                'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80'
+            ];
             
-            // Animate elements on scroll
-            gsap.utils.toArray('.glass-card').forEach(card => {
-                gsap.from(card, {
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top 80%",
-                        end: "bottom 20%",
-                        toggleActions: "play none none reverse"
-                    },
-                    y: 50,
-                    opacity: 0,
-                    duration: 1,
-                    ease: "power2.out"
-                });
-            });
+            const mainImage = document.getElementById('mainDeveloperImage');
+            const fallback = document.getElementById('imageFallback');
             
-            // Floating animation for developer image
-            gsap.to('.developer-image', {
-                y: 20,
-                duration: 2,
-                repeat: -1,
-                yoyo: true,
-                ease: "power1.inOut"
-            });
+            let currentIndex = 0;
+            
+            function tryNextImage() {
+                if (currentIndex >= alternativeUrls.length) {
+                    console.log('All alternative images failed, keeping fallback');
+                    return;
+                }
+                
+                const img = new Image();
+                img.onload = function() {
+                    console.log('Alternative image loaded successfully');
+                    mainImage.innerHTML = '';
+                    mainImage.appendChild(img);
+                    mainImage.style.display = 'block';
+                    fallback.style.display = 'none';
+                };
+                
+                img.onerror = function() {
+                    console.log('Alternative image failed, trying next...');
+                    currentIndex++;
+                    tryNextImage();
+                };
+                
+                img.src = alternativeUrls[currentIndex];
+                img.alt = 'Professional Developer';
+                img.style.width = '100%';
+                img.style.height = '100%';
+                img.style.objectFit = 'cover';
+                img.style.borderRadius = '18px';
+            }
+            
+            // Start trying alternative images
+            tryNextImage();
         }
+        
+        // Add floating animation to developer image
+        function animateDeveloperImage() {
+            const image = document.querySelector('.developer-image');
+            if (!image) return;
+            
+            let startTime = null;
+            
+            function floatAnimation(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const progress = timestamp - startTime;
+                
+                // Floating effect
+                const y = Math.sin(progress * 0.002) * 20;
+                const rotation = Math.sin(progress * 0.001) * 3;
+                
+                image.style.transform = `translateY(${y}px) rotate(${rotation}deg)`;
+                
+                requestAnimationFrame(floatAnimation);
+            }
+            
+            requestAnimationFrame(floatAnimation);
+        }
+        
+        // Start animations when page loads
+        window.addEventListener('load', function() {
+            animateDeveloperImage();
+        });
     </script>
 </body>
 </html>
