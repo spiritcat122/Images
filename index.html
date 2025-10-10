@@ -19,7 +19,7 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-image: url('https://ik.imagekit.io/jbxs2z512/1305149.jpeg?updatedAt=1759038090013');
+      background-image: url('https://spiritcat122.github.io/Images/p/photo_2025-10-10_16-10-51.jpg');
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -470,7 +470,57 @@
   </footer>
 
 
-  <script src="/l.js"></script>
+  <script>
+    let countdown = 20;
+    let redirectUrl = 'https://telegram.me/Wizard_Bots';
+    let countdownInterval;
+    function getCode() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('c');
+    }
+    function startCountdown() {
+      if (countdownInterval) {
+        clearInterval(countdownInterval);
+      }
+      countdown = countdown;
+      const countdownElement = document.getElementById('countdown');
+      const instructionText = document.getElementById('instructionText');
+      
+      decodeUrl().then(url => {
+        redirectUrl = url;
+
+        countdownInterval = setInterval(() => {
+            if (countdownElement) countdownElement.textContent = countdown;
+            if (instructionText) instructionText.textContent = `Redirecting in ${countdown} seconds...`;
+
+            if (countdown <= 0) {
+                clearInterval(countdownInterval);
+                window.location.href = redirectUrl;
+            }
+            countdown--;
+        }, 1000);
+    });
+}
+
+function setupRefreshButton() {
+    const refreshBtn = document.getElementById('refreshBtn');
+    if (refreshBtn) {
+        refreshBtn.addEventListener('click', function() {
+            console.log('Refresh button clicked');
+            startCountdown();
+        });
+    } else {
+        console.error('Refresh button not found');
+    }
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Page loaded, setting up...');
+    setupRefreshButton();
+    startCountdown();
+});
+  </script>
 </body>
 
 </html>
