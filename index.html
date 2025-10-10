@@ -6,7 +6,7 @@
     <title>ULTRA PEAK | Elite Developer</title>
     
     <!-- Favicon -->
-    <link rel="icon" href="https://spiritcat122.github.io/Images/p/0623f84e2f4b8e8a44298cf843ce4f29.jpg">
+    <link rel="icon" href="https://spiritcat122.github.io/Images/p/97a18b83af983f1c5235a2872a9f868d.jpg">
     
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -507,6 +507,76 @@
                 opacity: 0;
             }
         }
+
+        /* About Section Styles */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            padding-left: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--neon);
+            box-shadow: 0 0 15px var(--neon);
+            z-index: 2;
+        }
+        
+        /* Project Cards */
+        .project-card {
+            height: 100%;
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+        
+        .project-image {
+            height: 200px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .project-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+        }
+        
+        .project-card:hover .project-image::after {
+            animation: shimmer 1.5s;
+        }
         
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -609,8 +679,79 @@
         </div>
     </section>
 
+    <!-- About Section -->
+    <section id="about" class="bg-pattern">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-4 mb-3 neon-text" style="color: var(--accent);">About The Developer</h2>
+                <p class="lead">The journey of innovation and technological mastery</p>
+            </div>
+            
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="glass-card p-5 h-100">
+                        <h3 class="mb-4 neon-text" style="color: var(--neon);">Crafting Digital Excellence</h3>
+                        <p class="mb-4">
+                            With over 5 years of experience in cutting-edge web development, I specialize in creating 
+                            digital solutions that not only look stunning but also deliver exceptional performance 
+                            and user experiences.
+                        </p>
+                        <p class="mb-4">
+                            My journey began with a passion for technology and has evolved into a mastery of modern 
+                            frameworks and development practices. I believe in pushing boundaries and exploring 
+                            new possibilities in the digital landscape.
+                        </p>
+                        
+                        <div class="row text-center mt-5">
+                            <div class="col-4">
+                                <h4 class="neon-text" style="color: var(--primary);">100%</h4>
+                                <p>Client Satisfaction</p>
+                            </div>
+                            <div class="col-4">
+                                <h4 class="neon-text" style="color: var(--secondary);">24/7</h4>
+                                <p>Support</p>
+                            </div>
+                            <div class="col-4">
+                                <h4 class="neon-text" style="color: var(--accent);">50+</h4>
+                                <p>Tech Stack</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h4>Senior Full Stack Developer</h4>
+                            <p class="text-primary mb-2">TechVision Inc. • 2022 - Present</p>
+                            <p>Leading development of enterprise applications using cutting-edge technologies and frameworks.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h4>Frontend Architect</h4>
+                            <p class="text-primary mb-2">Digital Solutions Co. • 2020 - 2022</p>
+                            <p>Architected scalable frontend solutions and mentored junior developers.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h4>Web Developer</h4>
+                            <p class="text-primary mb-2">StartUp Ventures • 2019 - 2020</p>
+                            <p>Developed and maintained web applications using modern JavaScript frameworks.</p>
+                        </div>
+                        
+                        <div class="timeline-item">
+                            <h4>Tech Enthusiast</h4>
+                            <p class="text-primary mb-2">Since 2018</p>
+                            <p>Continuous learning and exploration of emerging technologies and development practices.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Skills Section -->
-    <section id="skills" class="bg-pattern">
+    <section id="skills" class="bg-dark">
         <div class="container">
             <div class="text-center mb-5" data-aos="fade-up">
                 <h2 class="display-4 mb-3 neon-text" style="color: var(--neon);">Elite Tech Stack</h2>
@@ -679,6 +820,76 @@
                 <button class="btn btn-gradient me-3" id="viewAngularProjects">View Angular Projects</button>
                 <button class="btn btn-outline-light me-3" id="viewSvelteProjects">View Svelte Projects</button>
                 <button class="btn btn-gradient" id="viewAllProjects">View All Projects</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="bg-pattern">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h2 class="display-4 mb-3 neon-text" style="color: var(--primary);">Revolutionary Projects</h2>
+                <p class="lead">Showcasing innovation and technical excellence across various domains</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in">
+                    <div class="project-card glass-card magnetic-card">
+                        <div class="project-image">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="mb-3">Quantum Analytics</h4>
+                            <p class="text-muted mb-3">Real-time data visualization platform with AI-powered insights and predictive analytics.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-primary me-1">Angular</span>
+                                <span class="badge bg-info me-1">Three.js</span>
+                                <span class="badge bg-success">D3.js</span>
+                            </div>
+                            <button class="btn btn-sm btn-gradient">View Project</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="project-card glass-card magnetic-card">
+                        <div class="project-image">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="mb-3">Nexus E-Commerce</h4>
+                            <p class="text-muted mb-3">Ultra-fast online store with immersive 3D product visualization and AR integration.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-warning me-1">Svelte</span>
+                                <span class="badge bg-danger me-1">Firebase</span>
+                                <span class="badge bg-purple">Stripe</span>
+                            </div>
+                            <button class="btn btn-sm btn-gradient">View Project</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="project-card glass-card magnetic-card">
+                        <div class="project-image">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="p-4">
+                            <h4 class="mb-3">Cyber UI System</h4>
+                            <p class="text-muted mb-3">Advanced component library with cyberpunk design system and dark mode excellence.</p>
+                            <div class="mb-3">
+                                <span class="badge bg-purple me-1">Bootstrap 5</span>
+                                <span class="badge bg-success me-1">SASS</span>
+                                <span class="badge bg-info">GSAP</span>
+                            </div>
+                            <button class="btn btn-sm btn-gradient">View Project</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <button class="btn btn-gradient" id="loadMoreProjects">Load More Projects</button>
             </div>
         </div>
     </section>
@@ -937,7 +1148,7 @@
         function initButtonFunctions() {
             // Explore Work Button
             document.getElementById('exploreWork').addEventListener('click', function() {
-                document.getElementById('skills').scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
                 createRipple(this);
             });
             
@@ -960,6 +1171,12 @@
             
             document.getElementById('viewAllProjects').addEventListener('click', function() {
                 alert('Opening Complete Project Portfolio...');
+                createRipple(this);
+            });
+            
+            // Load More Projects Button
+            document.getElementById('loadMoreProjects').addEventListener('click', function() {
+                alert('Loading more amazing projects...');
                 createRipple(this);
             });
             
@@ -991,6 +1208,15 @@
                 e.preventDefault();
                 alert('Project Launched! 🚀\nThank you for your vision. We will contact you shortly.');
                 this.reset();
+            });
+
+            // Project View Buttons
+            document.querySelectorAll('.project-card .btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const projectTitle = this.closest('.project-card').querySelector('h4').textContent;
+                    alert(`Opening ${projectTitle} details...`);
+                    createRipple(this);
+                });
             });
         }
         
